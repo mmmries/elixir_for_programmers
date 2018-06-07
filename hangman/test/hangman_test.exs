@@ -3,6 +3,6 @@ defmodule HangmanTest do
   doctest Hangman
 
   test "greets the world" do
-    assert Hangman.hello() == :world
+    assert is_binary(Hangman.hello())
   end
 end
