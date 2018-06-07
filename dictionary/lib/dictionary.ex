@@ -1,7 +1,12 @@
 defmodule Dictionary do
-  @words "assets/words.txt" |> File.read! |> String.split("\n", trim: true)
-
   def random_word do
-    Enum.random(@words)
+    word_list()
+    |> Enum.random()
+  end
+
+  defp word_list do
+    "assets/words.txt"
+    |> File.read!
+    |> String.split("\n", trim: true)
   end
 end
