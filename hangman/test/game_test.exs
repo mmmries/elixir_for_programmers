@@ -35,4 +35,32 @@ defmodule Hangman.GameTest do
     {game, _tally} = Game.make_move(game, "x")
     assert game.game_state == :already_used
   end
+
+  test "guessing all the letters in a word returns :won" do
+    game = Game.new() |> Map.put(:letters, ["w", "o", "n"])
+    assert {game, _tally} = Game.make_move(game, "w")
+    assert %{turns_left: 7, game_state: :good_guess} = game
+    assert {game, _tally} = Game.make_move(game, "o")
+    assert %{turns_left: 7, game_state: :good_guess} = game
+    assert {game, _tally} = Game.make_move(game, "n")
+    assert %{turns_left: 7, game_state: :won} = game
+  end
+
+  test "guessing the wrong letters" do
+    game = Game.new() |> Map.put(:letters, ["w", "o", "n"])
+    assert {game, _tally} = Game.make_move(game, "a")
+    assert %{turns_left: 6, game_state: :bad_guess} = game
+    assert {game, _tally} = Game.make_move(game, "b")
+    assert %{turns_left: 5, game_state: :bad_guess} = game
+    assert {game, _tally} = Game.make_move(game, "c")
+    assert %{turns_left: 4, game_state: :bad_guess} = game
+    assert {game, _tally} = Game.make_move(game, "d")
+    assert %{turns_left: 3, game_state: :bad_guess} = game
+    assert {game, _tally} = Game.make_move(game, "e")
+    assert %{turns_left: 2, game_state: :bad_guess} = game
+    assert {game, _tally} = Game.make_move(game, "f")
+    assert %{turns_left: 1, game_state: :bad_guess} = game
+    assert {game, _tally} = Game.make_move(game, "g")
+    assert %{turns_left: 0, game_state: :lost} = game
+  end
 end
