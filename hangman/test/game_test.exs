@@ -15,4 +15,24 @@ defmodule Hangman.GameTest do
       assert letter =~ ~r/[a-z]/
     end)
   end
+
+  test "state isn't changed for :won or :lost game" do
+    for state <- [:won, :lost] do
+      game = Game.new() |> Map.put(:game_state, state)
+      assert { ^game, _ } = Game.make_move(game, "z")
+    end
+  end
+
+  test "first time guessing a letter" do
+    game = Game.new()
+    {game, _tally} = Game.make_move(game, "x")
+    assert game.game_state != :already_used
+  end
+
+  test "guessing a letter twice returns :already used" do
+    game = Game.new()
+    {game, _tally} = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
+    assert game.game_state == :already_used
+  end
 end
