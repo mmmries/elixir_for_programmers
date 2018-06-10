@@ -16,15 +16,9 @@ defmodule TextClient.Interact do
   def play(state) do
     respond(state.tally)
     show_state(state.tally)
-    state = accept_guess(state)
-    play(state)
-  end
-
-  defp accept_guess(state = %{game_service: game}) do
-    letter = IO.gets("Guess a letter: ") |> String.trim
-    { game, tally} = Hangman.make_move(game, letter)
-    IO.puts ""
-    %State{state | game_service: game, tally: tally}
+    guess = TextClient.PromptUser.guess_letter(state.tally)
+    { game, tally } = Hangman.make_move(state.game_service, guess)
+    play(%{ state | game_service: game, tally: tally })
   end
 
   defp respond(%{game_state: :initializing}), do: IO.puts "Let's get started"
