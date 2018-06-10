@@ -1,18 +1,7 @@
 defmodule Bot do
-  @moduledoc """
-  Documentation for Bot.
-  """
+  @letters for num <- ?a..?z, do: <<num>>
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Bot.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def guess_letter(_tally) do
+    Enum.random(@letters)
   end
 end
