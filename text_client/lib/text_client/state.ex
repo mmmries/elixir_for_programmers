@@ -1,5 +1,5 @@
 defmodule TextClient.State do
-  defstruct [:game_service, :tally, :guessed]
+  defstruct [:game_service, :tally]
 
   def new(game) do
     %__MODULE__{
