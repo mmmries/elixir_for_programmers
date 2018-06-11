@@ -8,7 +8,7 @@ defmodule Hangman.Game do
 
   def new do
     %Hangman.Game{
-      letters: Dictionary.random_word |> String.codepoints,
+      letters: Dictionary.start() |> Dictionary.random_word() |> String.codepoints,
     }
   end
 
@@ -57,6 +57,6 @@ defmodule Hangman.Game do
     |> Enum.map(fn(letter) -> reveal_letter(letter, MapSet.member?(used, letter)) end)
   end
 
-  defp reveal_letter(letter, _in_word = true),  do: letter
-  defp reveal_letter(letter, _in_word = false), do: "_"
+  defp reveal_letter(letter, _in_word = true),   do: letter
+  defp reveal_letter(_letter, _in_word = false), do: "_"
 end
