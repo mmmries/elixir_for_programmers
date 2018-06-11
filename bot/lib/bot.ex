@@ -4,8 +4,8 @@ defmodule Bot do
 
   def guess_letter(%{letters: letters, used: used}) do
     letter = letters
-             |> length()
-             |> words_of_size()
+             |> build_regex()
+             |> filter_words()
              |> letters_by_frequency()
              |> filter_by_used(used)
              |> pick_most_likely()
@@ -13,9 +13,19 @@ defmodule Bot do
     letter
   end
 
-  defp words_of_size(size) do
+  defp build_regex(letters) do
+    body = letters
+           |> Enum.map(&letter_to_pattern_chunk/1)
+           |> Enum.join
+    Regex.compile!("\\A#{body}\\z")
+  end
+
+  defp letter_to_pattern_chunk("_"), do: "[a-z]"
+  defp letter_to_pattern_chunk(letter), do: letter
+
+  defp filter_words(regex) do
     Dictionary.word_list()
-    |> Enum.filter(fn(word) -> String.length(word) == size end)
+    |> Enum.filter(fn(word) -> word =~ regex end)
   end
 
   defp letters_by_frequency(words) do
