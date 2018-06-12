@@ -24,9 +24,7 @@ defmodule Bot do
   defp letter_to_pattern_chunk(letter), do: letter
 
   defp filter_words(regex) do
-    Dictionary.start()
-    |> Dictionary.word_list()
-    |> Enum.filter(fn(word) -> word =~ regex end)
+    Dictionary.filtered_word_list(fn(word) -> word =~ regex end)
   end
 
   defp letters_by_frequency(words) do

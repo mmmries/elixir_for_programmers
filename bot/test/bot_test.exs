@@ -5,7 +5,7 @@ defmodule BotTest do
   test "bot guesses a letter when given a tally" do
     capture_io(fn ->
       tally = %{letters: ["_", "_", "_", "_"], used: ["a","e"]}
-      for _i <- 1..100 do
+      for _i <- 1..1000 do
         letter = Bot.guess_letter(tally)
         assert letter =~ ~r/\A[a-z]\z/
       end
