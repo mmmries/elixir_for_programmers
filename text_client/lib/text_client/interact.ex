@@ -4,7 +4,8 @@ defmodule TextClient.Interact do
   def start, do: start(TextClient.PromptUser)
 
   def start(guesser) do
-    Hangman.new_game()
+    {:ok, game} = Hangman.new_game()
+    game
     |> State.new(guesser)
     |> play()
   end
@@ -18,9 +19,9 @@ defmodule TextClient.Interact do
   def play(state) do
     show_state(state.tally)
     guess = apply(state.guesser, :guess_letter, [state.tally])
-    { game, tally } = Hangman.make_move(state.game, guess)
+    tally = Hangman.make_move(state.game, guess)
     IO.puts ""
-    play(%{ state | game: game, tally: tally })
+    play(%{ state | game: state.game, tally: tally })
   end
 
   defp respond(%{game_state: :initializing}), do: IO.puts "Let's get started"
