@@ -3,6 +3,7 @@ defmodule HangmanTest do
   doctest Hangman
 
   test "can create a new game" do
-    assert Hangman.new_game().__struct__ == Hangman.Game
+    assert {:ok, game_pid} = Hangman.new_game()
+    assert %{game_state: :initializing} = Hangman.tally(game_pid)
   end
 end
