@@ -19,30 +19,30 @@ defmodule Hangman.GameTest do
   test "state isn't changed for :won or :lost game" do
     for state <- [:won, :lost] do
       game = Game.new() |> Map.put(:game_state, state)
-      assert ^game = Game.make_move(game, "z")
+      assert {^game, _tally} = Game.make_move(game, "z")
     end
   end
 
   test "first time guessing a letter" do
     game = Game.new()
-    game = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
     assert game.game_state != :already_used
   end
 
   test "guessing a letter twice returns :already used" do
     game = Game.new()
-    game = Game.make_move(game, "x")
-    game = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
+    {game, _tally} = Game.make_move(game, "x")
     assert game.game_state == :already_used
   end
 
   test "guessing all the letters in a word returns :won" do
     game = Game.new() |> Map.put(:letters, ["w", "o", "n"])
-    assert game = Game.make_move(game, "w")
+    assert {game, _tally} = Game.make_move(game, "w")
     assert %{turns_left: 7, game_state: :good_guess} = game
-    assert game = Game.make_move(game, "o")
+    assert {game, _tally} = Game.make_move(game, "o")
     assert %{turns_left: 7, game_state: :good_guess} = game
-    assert game = Game.make_move(game, "n")
+    assert {game, _tally} = Game.make_move(game, "n")
     assert %{turns_left: 7, game_state: :won} = game
   end
 
@@ -75,7 +75,7 @@ defmodule Hangman.GameTest do
 
   defp run_moves(moves, game) do
     Enum.reduce(moves, game, fn({guess, game_state, turns_left}, game) ->
-      game = Game.make_move(game, guess)
+      {game, _tally} = Game.make_move(game, guess)
       assert %{game_state: ^game_state, turns_left: ^turns_left} = game
       game
     end)
