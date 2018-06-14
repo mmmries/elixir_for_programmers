@@ -1,8 +1,6 @@
 defmodule Hangman do
-  alias Hangman.Server
-
   def new_game() do
-     Server.start_link()
+    DynamicSupervisor.start_child(Hangman.Supervisor, {Hangman.Server, nil})
   end
 
   def make_move(game_pid, letter) do
