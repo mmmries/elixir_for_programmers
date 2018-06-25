@@ -1,4 +1,4 @@
-defmodule GallowsWeb.ConnCase do
+defmodule Gallows.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,10 +19,10 @@ defmodule GallowsWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import GallowsWeb.Router.Helpers
+      import Gallows.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint GallowsWeb.Endpoint
+      @endpoint Gallows.Endpoint
     end
   end
 
