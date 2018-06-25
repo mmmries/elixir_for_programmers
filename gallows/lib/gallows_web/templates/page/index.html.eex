@@ -1,3 +1,3 @@
 <div class="jumbotron">
-  You have <%= plural_of(4, "egg") %>
+  You have <%= plural_of(@quantity, @product) %>
 </div>
