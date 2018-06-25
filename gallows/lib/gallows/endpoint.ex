@@ -1,7 +1,7 @@
-defmodule GallowsWeb.Endpoint do
+defmodule Gallows.Endpoint do
   use Phoenix.Endpoint, otp_app: :gallows
 
-  socket "/socket", GallowsWeb.UserSocket
+  socket "/socket", Gallows.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -37,7 +37,7 @@ defmodule GallowsWeb.Endpoint do
     key: "_gallows_key",
     signing_salt: "I4C7TuXc"
 
-  plug GallowsWeb.Router
+  plug Gallows.Router
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

@@ -5,7 +5,7 @@ defmodule Gallows.Application do
     import Supervisor.Spec
 
     children = [
-      supervisor(GallowsWeb.Endpoint, []),
+      supervisor(Gallows.Endpoint, []),
     ]
 
     opts = [strategy: :one_for_one, name: Gallows.Supervisor]
@@ -13,7 +13,7 @@ defmodule Gallows.Application do
   end
 
   def config_change(changed, _new, removed) do
-    GallowsWeb.Endpoint.config_change(changed, removed)
+    Gallows.Endpoint.config_change(changed, removed)
     :ok
   end
 end

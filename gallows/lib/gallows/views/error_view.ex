@@ -1,5 +1,5 @@
-defmodule GallowsWeb.ErrorView do
-  use GallowsWeb, :view
+defmodule Gallows.ErrorView do
+  use Gallows, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

@@ -1,5 +1,5 @@
-defmodule GallowsWeb.Router do
-  use GallowsWeb, :router
+defmodule Gallows.Router do
+  use Gallows, :router
 
   pipeline :browser do
     plug :accepts, ["html"]

@@ -1,4 +1,4 @@
-defmodule GallowsWeb.ErrorHelpers do
+defmodule Gallows.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -36,9 +36,9 @@ defmodule GallowsWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(GallowsWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Gallows.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(GallowsWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Gallows.Gettext, "errors", msg, opts)
     end
   end
 end

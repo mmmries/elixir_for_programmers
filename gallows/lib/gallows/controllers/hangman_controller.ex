@@ -1,5 +1,5 @@
-defmodule GallowsWeb.PageController do
-  use GallowsWeb, :controller
+defmodule Gallows.HangmanController do
+  use Gallows, :controller
 
   def index(conn, _params) do
     render conn, "index.html", product: "pear", quantity: 2
