@@ -1,0 +1,10 @@
+<h1>Game</h1>
+
+<pre><%= inspect @tally %></pre>
+
+<p>Turns Left: <%= @tally.turns_left %></p>
+<p>Word So Far: <%= word_so_far(@tally) %></p>
+
+<form>
+
+</form>
