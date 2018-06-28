@@ -1,0 +1,7 @@
+<h2>You Lost!</h2>
+
+<div style="font-size: 60p; margin: auto;">😭</div>
+
+<h4><%= word_so_far(@tally) %></h4>
+
+<%= button "Play Again?", to: hangman_path(@conn, :new_game) %>

@@ -1,10 +1,11 @@
-<h1>Game</h1>
-
-<pre><%= inspect @tally %></pre>
+<h2><%= prompt(@tally) %></h2>
 
 <p>Turns Left: <%= @tally.turns_left %></p>
 <p>Word So Far: <%= word_so_far(@tally) %></p>
 
-<form>
+<%= form_for(@conn, hangman_path(@conn, :make_move), [as: :make_move, method: :put], fn f ->%>
+  <%= text_input(f, :guess, autofocus: true) %>
+  <%= submit("Make a Guess") %>
+<% end) %>
 
-</form>
+<pre><%= inspect @tally %></pre>
