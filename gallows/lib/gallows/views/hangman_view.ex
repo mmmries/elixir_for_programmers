@@ -21,4 +21,7 @@ defmodule Gallows.HangmanView do
   defp prompt(:bad_guess),     do: alert("warning", "Nope, that letter's not in the word")
   defp prompt(:initializing),  do: alert("info", "Take a guess")
   defp prompt(:already_used),  do: alert("warning", "You already guessed that letter")
+
+  defp turn(left, target) when target >= left, do: "dim"
+  defp turn(_left, _target),                   do: "faint"
 end

@@ -2,3 +2,6 @@
 body {
   width: 100%;
 }
+
+.faint { opacity: 0.08 }
+.dim   { opacity: 1.00 }
