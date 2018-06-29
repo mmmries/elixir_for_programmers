@@ -6,14 +6,14 @@ defmodule Gallows.HangmanController do
 
     conn
     |> put_session(:game, game)
-    |> render(:game, tally: Hangman.tally(game))
+    |> render("game_field.html", tally: Hangman.tally(game))
   end
 
   def make_move(conn, %{"make_move" => %{"guess" => letter}}) do
     tally = attempt_move(conn, letter)
 
     put_in(conn.params["make_move"]["guess"], "")
-    |> render(:game, tally: tally)
+    |> render("game_field.html", tally: tally)
   end
 
   def new_game(conn, _params) do

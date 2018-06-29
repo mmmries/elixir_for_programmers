@@ -1,11 +1,13 @@
-<h2><%= prompt(@tally) %></h2>
+<%= prompt(@tally) %>
 
 <p>Turns Left: <%= @tally.turns_left %></p>
-<p>Word So Far: <%= word_so_far(@tally) %></p>
+<p><%= word_so_far(@tally) %></p>
 
-<%= form_for(@conn, hangman_path(@conn, :make_move), [as: :make_move, method: :put], fn f ->%>
-  <%= text_input(f, :guess, autofocus: true) %>
-  <%= submit("Make a Guess") %>
-<% end) %>
-
-<pre><%= inspect @tally %></pre>
+<%= if game_over?(@tally) do %>
+  <%= button "Play Again?", to: hangman_path(@conn, :new_game) %>
+<% else %>
+  <%= form_for(@conn, hangman_path(@conn, :make_move), [as: :make_move, method: :put], fn f ->%>
+    <%= text_input(f, :guess, autofocus: true) %>
+    <%= submit("Make a Guess") %>
+  <% end) %>
+<% end %>
