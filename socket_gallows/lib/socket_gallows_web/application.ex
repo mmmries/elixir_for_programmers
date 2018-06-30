@@ -14,8 +14,6 @@ defmodule SocketGallows.Application do
       # worker(SocketGallows.Worker, [arg1, arg2, arg3]),
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: SocketGallows.Supervisor]
     Supervisor.start_link(children, opts)
   end

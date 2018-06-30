@@ -6,7 +6,7 @@
 use Mix.Config
 
 # Configures the endpoint
-config :socket_gallows, SocketGallow.Endpoint,
+config :socket_gallows, SocketGallows.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "jH9NYEThTolH41uZjZNbVQG8QaRa5CtT24NYOdcBX1mzWAbhjrwVDa6QANLoZEDS",
   render_errors: [view: SocketGallows.ErrorView, accepts: ~w(html json)],
