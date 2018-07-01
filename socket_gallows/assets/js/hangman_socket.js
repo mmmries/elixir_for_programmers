@@ -7,7 +7,23 @@ export default class HangmanSocket {
   }
 
   connect_to_hangman() {
+    this.setup_channel()
+    this.channel.on("tally", tally => {
+      console.dir(tally)
+    })
+  }
+
+  setup_channel() {
     this.channel = this.socket.channel("hangman:game", {})
-    this.channel.join()
+    this.channel.join().receive("ok", resp => {
+      console.log("Connected: ", resp)
+      this.fetchTally()
+    }).receive("error", resp => {
+      alert(resp)
+    })
+  }
+
+  fetchTally() {
+    this.channel.push("tally", {})
   }
 }
